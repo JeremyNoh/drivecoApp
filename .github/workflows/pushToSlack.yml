@@ -17,7 +17,7 @@ jobs:
         run: |
           yarn
           yarn package:android
-          cd android && ./gradlew wrapper --gradle-version 5.5 && ./gradlew assembleRelease -x bundleReleaseJsAndAssets
+          cd android && ./gradlew wrapper --gradle-version 7.1.1 && ./gradlew assembleRelease -x bundleReleaseJsAndAssets
           cd ..
           yarn shipit:android
         env:
