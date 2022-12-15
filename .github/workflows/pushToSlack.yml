@@ -1,0 +1,25 @@
+name: Push to slack channel
+on:
+  push:
+    branches:
+      - master
+jobs:
+  ship-pr:
+    name: Push to slack
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x.x"
+      - name: Build android apk and send to slack
+        run: |
+          yarn
+          yarn package:android
+          cd android && ./gradlew wrapper --gradle-version 5.5 && ./gradlew assembleRelease -x bundleReleaseJsAndAssets
+          cd ..
+          yarn shipit:android
+        env:
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}

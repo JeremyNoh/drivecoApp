@@ -71,6 +71,7 @@
     "@react-native-community/cli-platform-ios": "^8.0.2",
     "@rnx-kit/metro-config": "^1.2.32",
     "@rnx-kit/metro-resolver-symlinks": "0.1.21",
+    "@slack/bolt": "^3.12.2",
     "@types/i18n-js": "3.8.2",
     "@types/jest": "26.0.19",
     "@types/react": "^17",
