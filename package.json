@@ -18,7 +18,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "adb": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
-    "postinstall": "node ./bin/postInstall",
+    "postinstall": "test -n \"$NOYARNPOSTINSTALL\" || node ./bin/postInstall",
     "bundle:ios": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios",
     "bundle:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "release:ios": "echo 'Not implemented yet: release:ios. Use Xcode. More info: https://reactnative.dev/docs/next/publishing-to-app-store'",
@@ -32,7 +32,7 @@
     "expo:build:detox": "detox build -c ios.sim.expo",
     "expo:test:detox": "./bin/downloadExpoApp.sh && detox test --configuration ios.sim.expo",
     "package:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
-    "build:android": "yarn && node ./shipit.js"
+    "build:android": "NOYARNPOSTINSTALL=1 yarn && node ./shipit.js"
   },
   "overrides": {
     "react-error-overlay": "6.0.9"
@@ -96,6 +96,7 @@
     "expo-detox-hook": "1.0.10",
     "expo-modules-autolinking": "0.10.1",
     "fbjs-scripts": "3.0.1",
+    "fs": "^0.0.1-security",
     "jest": "26",
     "jest-circus": "26",
     "jest-environment-node": "26",
@@ -105,6 +106,7 @@
     "metro-source-map": "0.71.1",
     "mocha": "6",
     "patch-package": "6.4.7",
+    "path": "^0.12.7",
     "postinstall-prepare": "1.0.1",
     "prettier": "2.6.2",
     "query-string": "^7.0.1",

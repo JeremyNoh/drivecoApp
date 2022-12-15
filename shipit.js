@@ -11,7 +11,8 @@ const slackBot = new App({
 })
 
 async function sendApk() {
-  const fileName = path.resolve(
+  const filename = "app-release.apk"
+  const file = path.resolve(
     __dirname,
     "..",
     "android",
@@ -20,18 +21,19 @@ async function sendApk() {
     "outputs",
     "apk",
     "release",
-    "app-release.apk",
+    filename,
   )
 
   try {
     // Call the files.upload method using the built-in WebClient
-    const result = await slackBot.client.files.upload({
+    const result = await slackBot.client.files.uploadV2({
       // The token you used to initialize your app is stored in the `context` object
       token,
-      channels: "#drivecotest",
-      initial_comment: "Here's new updated build :smile:",
+      channel_id: "C04FQQLN7EV",
+      initial_comment: "Une Nouvelle version est dispo !!! :smile:",
       // Include your filename in a ReadStream here
-      file: createReadStream(fileName),
+      filename,
+      file: createReadStream(file),
     })
     console.log("Sucessfully sent")
   } catch (error) {
