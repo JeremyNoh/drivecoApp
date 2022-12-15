@@ -14,7 +14,6 @@ async function sendApk() {
   const filename = "app-release.apk"
   const file = path.resolve(
     __dirname,
-    "..",
     "android",
     "app",
     "build",
