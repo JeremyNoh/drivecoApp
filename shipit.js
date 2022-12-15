@@ -24,17 +24,23 @@ async function sendApk() {
   )
 
   try {
-    // Call the files.upload method using the built-in WebClient
-    const result = await slackBot.client.files.uploadV2({
-      // The token you used to initialize your app is stored in the `context` object
-      token,
-      channel_id: "C04FQQLN7EV",
-      initial_comment: "Une Nouvelle version est dispo !!! :smile:",
-      // Include your filename in a ReadStream here
-      filename,
+    // await slackBot.client.files.uploadV2({
+    //   channel_id: "C04FQQLN7EV",
+    //   initial_comment: "Une Nouvelle version est dispo !!! :smile:",
+    //   request_file_info: true,
+    //   file_uploads: [
+    //     {
+    //       file: createReadStream(file),
+    //       filename,
+    //     },
+    //   ],
+    // })
+    const result = await slackBot.client.files.upload({
+      channels: "#drivecotest",
       file: createReadStream(file),
+      filename,
+      initial_comment: "Une Nouvelle version est dispo !!! :smile:",
     })
-    console.log("Sucessfully sent")
   } catch (error) {
     console.error("oops: ", error)
   }
