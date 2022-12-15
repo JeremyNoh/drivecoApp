@@ -2,7 +2,7 @@ name: Push to slack channel
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   ship-pr:
     name: Push to slack
